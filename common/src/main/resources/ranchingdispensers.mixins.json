@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "io.github.emberbocor.ranchingdispensers.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "AnimalAccessor",
+    "DispenserBlockAccessor",
+    "DefaultDispenseItemBehaviorMixin",
+    "MushroomCowAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

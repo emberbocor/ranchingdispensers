@@ -1,0 +1,32 @@
+plugins {
+    id 'multiloader-loader'
+    id 'net.minecraftforge.gradle'
+}
+
+minecraft {
+    mappings channel: 'official', version: minecraft_version
+}
+
+repositories {
+    minecraft.mavenizer(it)
+    maven fg.forgeMaven
+    maven fg.minecraftLibsMaven
+}
+
+dependencies {
+    implementation minecraft.dependency("net.minecraftforge:forge:${minecraft_version}-${forge_version}") {
+        runs {
+            client {
+                workingDir = rootProject.layout.projectDirectory.dir("runs/${minecraft_version}/forge-client")
+            }
+            server {
+                workingDir = rootProject.layout.projectDirectory.dir("runs/${minecraft_version}/forge-server")
+                args '--nogui'
+            }
+        }
+    }
+}
+
+tasks.named('jar', Jar) {
+    manifest.attributes(['MixinConfigs': "${mod_id}.mixins.json"])
+}

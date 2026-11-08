@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "${mod_id}",
+  "version": "${mod_version}",
+  "name": "${mod_name}",
+  "description": "Automate animal feeding, milking and mooshroom stew collection with vanilla dispensers. Only needed on the server.",
+  "authors": [
+    "emberbocor"
+  ],
+  "contact": {
+    "homepage": "https://github.com/emberbocor/ranchingdispensers",
+    "sources": "https://github.com/emberbocor/ranchingdispensers",
+    "issues": "https://github.com/emberbocor/ranchingdispensers/issues"
+  },
+  "license": "${mod_license}",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "io.github.emberbocor.ranchingdispensers.RanchingDispensersFabric"
+    ]
+  },
+  "mixins": [
+    "${mod_id}.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": "${fabric_loader_version_range}",
+    "fabric-api": "${fabric_api_version_range}",
+    "minecraft": "${fabric_minecraft_version_range}",
+    "java": ">=21"
+  }
+}
