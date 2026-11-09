@@ -64,7 +64,7 @@ public final class RanchingActions {
 
     private static ItemStack feed(BlockSource source, ItemStack stack, ServerConfig.Settings settings, boolean woolRegrowth) {
         Animal animal = nearest(source, candidate -> canRegrow(candidate, woolRegrowth)
-                || candidate.isFood(stack) && (candidate.isBaby() ? settings.feedBabies()
+                || candidate.isFood(stack) && (candidate.isBaby() ? settings.feedBabies() && candidate.canAgeUp()
                 : settings.feedAdults() && candidate.getAge() == 0 && candidate.canFallInLove()));
         if (animal == null) {
             return stack;

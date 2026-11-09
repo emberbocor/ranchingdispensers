@@ -5,10 +5,6 @@ plugins {
 
 neoForge {
     version = neo_version
-    parchment {
-        minecraftVersion = parchment_minecraft_version
-        mappingsVersion = parchment_mappings_version
-    }
     runs {
         client { client() }
         server {
@@ -16,7 +12,7 @@ neoForge {
             programArgument '--nogui'
         }
         configureEach {
-            gameDirectory = rootProject.file("runs/${minecraft_version}/neoforge")
+            gameDirectory = rootProject.file("runs/26.1/neoforge")
         }
     }
     mods {

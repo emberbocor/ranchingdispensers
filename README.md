@@ -9,7 +9,7 @@ Available for NeoForge, Forge and Fabric.
 ## Features
 
 - **Feed adults.** Ready animals enter vanilla love mode, with normal cooldowns and hearts. A partner need not already be present to feed one animal.
-- **Grow babies.** Food uses vanilla growth, whole-second rounding and forced-age behavior.
+- **Grow babies.** Food uses vanilla growth, whole-second rounding and forced-age behavior. Age-locked babies are skipped without consuming food.
 - **Milk animals.** Empty buckets milk adult cows, mooshrooms and goats, after vanilla fluid pickup gets its chance.
 - **Collect stew.** Bowls collect mushroom stew from adult mooshrooms, or suspicious stew with all prepared effects from a brown mooshroom.
 - **Optional wool regrowth.** With Sheep Wool Regrowth installed, wheat restores a sheared adult sheep's wool before breeding, keeping its color.
@@ -35,13 +35,13 @@ The dispenser still selects one nonempty slot at random. Each pulse performs at 
 
 | | NeoForge | Forge | Fabric |
 |---|---|---|---|
-| Minecraft | 1.21.11 | 1.21.11 | 1.21.11 |
-| Java | 21 | 21 | 21 |
-| Loader | NeoForge 21.11.42 or newer | Forge 61.0.1 or newer | Fabric Loader 0.17.3 or newer |
-| Other | | | Fabric API 0.139.5+1.21.11 or newer for Minecraft 1.21.11 |
-| Jar | `ranchingdispensers-neoforge-1.21.11-<version>.jar` | `ranchingdispensers-forge-1.21.11-<version>.jar` | `ranchingdispensers-fabric-1.21.11-<version>.jar` |
+| Minecraft | 26.1–26.1.2 | 26.1–26.1.2 | 26.1–26.1.2 |
+| Java | 25 | 25 | 25 |
+| Loader | NeoForge 26.1.0.1-beta or newer for your Minecraft version | Forge 62.0.0 (26.1), 63.0.0 (26.1.1) or 64.0.0 (26.1.2) or newer for that Minecraft version | Fabric Loader 0.18.4 or newer |
+| Other | | | Fabric API 0.144.0+26.1 or newer for Minecraft 26.1–26.1.2 |
+| Jar | `ranchingdispensers-neoforge-26.1-26.1.2-<version>.jar` | `ranchingdispensers-forge-26.1-26.1.2-<version>.jar` | `ranchingdispensers-fabric-26.1-26.1.2-<version>.jar` |
 
-On Minecraft 1.21.11, NeoForge and Forge are separate loaders that do not run each other's mods, so each has its own jar. Pick the jar that matches your game's loader.
+On Minecraft 26.1–26.1.2, NeoForge and Forge are separate loaders that do not run each other's mods, so each has its own jar. Pick the jar that matches your game's loader.
 
 ### Client and server
 
@@ -75,7 +75,7 @@ Removing the mod restores vanilla dispensing. Growth, breeding, wool changes and
 
 ## Compatibility
 
-- Targets Minecraft 1.21.11. Use one matching loader jar at a time.
+- Targets Minecraft 26.1–26.1.2. Use one matching loader jar at a time.
 - Sheep Wool Regrowth is optional and detected by mod ID, with no required dependency or direct class linkage.
 - Growth and breeding keep vanilla methods so cooldown hooks such as Instant Breeding can apply. Other mods can still change eligibility, growth, breeding and feedback.
 - Data packs can change food tags. Items with special dispenser handlers retain those handlers; adding them to a food tag does not enable automatic feeding with them.
@@ -83,15 +83,15 @@ Removing the mod restores vanilla dispensing. Growth, breeding, wool changes and
 
 ## Building from source
 
-Use JDK 21 and the included Gradle wrapper:
+Use JDK 25 and the included Gradle wrapper:
 
 ```
 ./gradlew build
 ```
 
-Release jars are written to `neoforge/build/libs/`, `forge/build/libs/` and `fabric/build/libs/`. Use Fabric's remapped jar from `fabric/build/libs/`; development jars are not release artifacts.
+Release jars are written to `neoforge/build/libs/`, `forge/build/libs/` and `fabric/build/libs/`. Use Fabric's ordinary jar from `fabric/build/libs/`; development jars are not release artifacts.
 
-Development profiles use `runs/1.21.11/neoforge` for both NeoForge sides, and separate `runs/1.21.11/forge-client`, `forge-server`, `fabric-client` and `fabric-server` directories. These directories are ignored by Git.
+Development profiles use `runs/26.1/neoforge` for both NeoForge sides, and separate `runs/26.1/forge-client`, `forge-server`, `fabric-client` and `fabric-server` directories. These directories are ignored by Git.
 
 ## License
 
