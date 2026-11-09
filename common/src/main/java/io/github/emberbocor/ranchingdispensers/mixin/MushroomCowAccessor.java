@@ -3,14 +3,20 @@ package io.github.emberbocor.ranchingdispensers.mixin;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.animal.MushroomCow;
-import net.minecraft.world.item.component.SuspiciousStewEffects;
 
 @Mixin(MushroomCow.class)
 public interface MushroomCowAccessor {
-    @Accessor("stewEffects")
-    SuspiciousStewEffects ranchingdispensers$getStewEffects();
+    @Accessor("effect")
+    MobEffect ranchingdispensers$getEffect();
 
-    @Accessor("stewEffects")
-    void ranchingdispensers$setStewEffects(SuspiciousStewEffects effects);
+    @Accessor("effect")
+    void ranchingdispensers$setEffect(MobEffect effect);
+
+    @Accessor("effectDuration")
+    int ranchingdispensers$getEffectDuration();
+
+    @Accessor("effectDuration")
+    void ranchingdispensers$setEffectDuration(int duration);
 }

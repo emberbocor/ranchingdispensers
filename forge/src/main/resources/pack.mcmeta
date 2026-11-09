@@ -1,10 +1,6 @@
 {
   "pack": {
-    "description": "Ranching Dispensers resources",
-    "pack_format": 34,
-    "supported_formats": {
-      "min_inclusive": 34,
-      "max_inclusive": 48
-    }
+    "pack_format": 15,
+    "description": "Ranching Dispensers resources"
   }
 }

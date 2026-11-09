@@ -11,7 +11,7 @@ Available for NeoForge, Forge and Fabric.
 - **Feed adults.** Ready animals enter vanilla love mode, with normal cooldowns and hearts. A partner need not already be present to feed one animal.
 - **Grow babies.** Food uses vanilla growth, whole-second rounding and forced-age behavior.
 - **Milk animals.** Empty buckets milk adult cows, mooshrooms and goats, after vanilla fluid pickup gets its chance.
-- **Collect stew.** Bowls collect mushroom stew from adult mooshrooms, or suspicious stew with all prepared effects from a brown mooshroom.
+- **Collect stew.** Bowls collect mushroom stew from adult mooshrooms, or suspicious stew with the prepared effect from a brown mooshroom.
 - **Optional wool regrowth.** With Sheep Wool Regrowth installed, wheat restores a sheared adult sheep's wool before breeding, keeping its color.
 - **Keep unused supplies.** Supported food and containers stay inside when their enabled action has no eligible target.
 
@@ -21,12 +21,12 @@ Point a **vanilla dispenser** at the block containing your animals and give it a
 
 The dispenser still selects one nonempty slot at random. Each pulse performs at most one ranching action, consumes one item and affects one animal. There is no smarter slot selection, larger search area or feeding between pulses. Droppers keep normal transfer and ejection behavior.
 
-- Food follows Minecraft's animal food tags and `isFood` checks, including data pack changes after reload. Defaults are wheat for cows/mooshrooms/sheep/goats; carrots, potatoes or beetroot for pigs; chicken seeds; and carrots, golden carrots or dandelions for rabbits. Only the seven listed entity types and their vanilla variants are included.
+- Food follows Minecraft 1.20.1's vanilla food ingredients and `isFood` checks. This version does not use animal food tags or support food-tag changes through data pack reload. Defaults are wheat for cows/mooshrooms/sheep/goats; carrots, potatoes or beetroot for pigs; wheat, melon, pumpkin, beetroot or torchflower seeds and pitcher pods for chickens; and carrots, golden carrots or dandelions for rabbits. Only the seven listed entity types and their vanilla variants are included.
 - Adults need age zero and must not already be in love. Babies gain about 10% of remaining growth time, rounded down to whole seconds. Near adulthood, a valid meal can consume food while adding zero seconds of growth; no minimum growth is imposed.
-- Existing special dispenser handlers take priority over feeding, even if a data pack marks their items as food. Bone meal, projectiles, armor, shears and filled buckets retain their handlers. Flowers that prepare a brown mooshroom's effects must still be given by a player.
+- Existing special dispenser handlers take priority over feeding, when an item is also accepted as food. Bone meal, projectiles, armor, shears and filled buckets retain their handlers. Flowers that prepare a brown mooshroom's effects must still be given by a player.
 - An empty bucket first attempts original fluid pickup once. If that fails, a valid adult can supply milk, without an added cooldown. Successful fluid pickup ends that pulse.
 - One empty container becomes one result. If the input stack runs out, its slot holds the result. Otherwise the result is inserted into the dispenser; if there is no space, it is ejected. Hoppers still move items normally.
-- Suspicious stew consumes all prepared effects. The next bowl yields ordinary mushroom stew until a player prepares another effect.
+- Suspicious stew consumes the prepared effect and duration. The next bowl yields ordinary mushroom stew until a player prepares another effect.
 - Optional wool regrowth works even while an adult is on breeding cooldown or already in love. That pulse only regrows wool; a later pulse can breed when ready. Without Sheep Wool Regrowth, wheat follows ordinary breeding rules.
 - Feeding has no player owner and gives no dispenser-related player credit. Breeding XP stays vanilla; a mate genuinely fed by a player can still provide that player's normal breeding credit.
 - Feedback uses vanilla particles, sounds and entity events. Baby feeding sends a happy-villager particle from the server when accepted; it does not reproduce the client-predicted 40-tick particle sequence of a player's click. Ranching dispenser feedback plays once per pulse, including result overflow.
@@ -35,13 +35,13 @@ The dispenser still selects one nonempty slot at random. Each pulse performs at 
 
 | | NeoForge | Forge | Fabric |
 |---|---|---|---|
-| Minecraft | 1.21.1 | 1.21.1 | 1.21.1 |
-| Java | 21 | 21 | 21 |
-| Loader | NeoForge 21.1.1 or newer | Forge 52.0.0 or newer | Fabric Loader 0.15.11 or newer |
-| Other | | | Fabric API 0.102.0+1.21.1 or newer for Minecraft 1.21.1 |
-| Jar | `ranchingdispensers-neoforge-1.21.1-<version>.jar` | `ranchingdispensers-forge-1.21.1-<version>.jar` | `ranchingdispensers-fabric-1.21.1-<version>.jar` |
+| Minecraft | 1.20.1 | 1.20.1 | 1.20.1 |
+| Java | 17 | 17 | 17 |
+| Loader | NeoForge 1.20.1-47.1.5 or newer | Forge 47.1.0 or newer | Fabric Loader 0.14.21 or newer |
+| Other | | | Fabric API 0.83.0+1.20.1 or newer for Minecraft 1.20.1 |
+| Jar | `ranchingdispensers-forge-1.20.1-<version>.jar` | `ranchingdispensers-forge-1.20.1-<version>.jar` | `ranchingdispensers-fabric-1.20.1-<version>.jar` |
 
-On Minecraft 1.21.1, NeoForge and Forge are separate loaders that do not run each other's mods, so each has its own jar. Pick the jar that matches your game's loader.
+On Minecraft 1.20.1, Forge and NeoForge use the same Forge jar. Fabric uses its own jar. Pick the jar that matches your game's loader.
 
 ### Client and server
 
@@ -75,23 +75,23 @@ Removing the mod restores vanilla dispensing. Growth, breeding, wool changes and
 
 ## Compatibility
 
-- Targets Minecraft 1.21.1. Use one matching loader jar at a time.
+- Targets Minecraft 1.20.1. Use one matching loader jar at a time.
 - Sheep Wool Regrowth is optional and detected by mod ID, with no required dependency or direct class linkage.
 - Growth and breeding keep vanilla methods so cooldown hooks such as Instant Breeding can apply. Other mods can still change eligibility, growth, breeding and feedback.
-- Data packs can change food tags. Items with special dispenser handlers retain those handlers; adding them to a food tag does not enable automatic feeding with them.
+- Minecraft 1.20.1 animal foods use vanilla ingredients rather than food tags. Data pack food-tag changes do not extend feeding; items with special dispenser handlers retain those handlers.
 - Mods replacing dispenser behaviors or injecting into the same default/fallback execution may take priority or conflict. Smart Dispensers, Carpet Extra and arbitrary dispenser modifications have no compatibility guarantee.
 
 ## Building from source
 
-Use JDK 21 and the included Gradle wrapper:
+Use JDK 21 to run Gradle, with JDK 17 available for game compilation, and the included Gradle wrapper:
 
 ```
 ./gradlew build
 ```
 
-Release jars are written to `neoforge/build/libs/`, `forge/build/libs/` and `fabric/build/libs/`. Use Fabric's remapped jar from `fabric/build/libs/`; development jars are not release artifacts.
+Release jars are written to `forge/build/libs/` and `fabric/build/libs/`. Use Fabric's remapped jar from `fabric/build/libs/`; development jars are not release artifacts.
 
-Development profiles use `runs/1.21.1/neoforge` for both NeoForge sides, and separate `runs/1.21.1/forge-client`, `forge-server`, `fabric-client` and `fabric-server` directories. These directories are ignored by Git.
+Development profiles use separate `runs/1.20.1/forge-client`, `forge-server`, `fabric-client` and `fabric-server` directories. These directories are ignored by Git.
 
 ## License
 
@@ -99,4 +99,4 @@ MIT, copyright emberbocor. See [LICENSE](LICENSE).
 
 The original NeoForged template notice is retained in [TEMPLATE_LICENSE.txt](TEMPLATE_LICENSE.txt).
 
-The Fabric jar bundles unmodified NightConfig core and toml 3.8.0 under LGPL-3.0, with notice, source links and LGPL/GPL texts in `META-INF/`. NeoForge and Forge use their loader-provided NightConfig libraries.
+The Fabric jar bundles unmodified NightConfig core and toml 3.6.4 under LGPL-3.0, with notice, source links and LGPL/GPL texts in `META-INF/`. NeoForge and Forge use their loader-provided NightConfig libraries.

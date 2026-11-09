@@ -30,12 +30,16 @@ dependencies {
 }
 
 loom {
+    mixin {
+        useLegacyMixinAp = true
+        defaultRefmapName = "${mod_id}.refmap.json"
+    }
     runs {
         client {
-            runDir project.relativePath(rootProject.file("runs/${minecraft_version}/fabric-client"))
+            runDir project.relativePath(rootProject.file('runs/1.20.1/fabric-client'))
         }
         server {
-            runDir project.relativePath(rootProject.file("runs/${minecraft_version}/fabric-server"))
+            runDir project.relativePath(rootProject.file('runs/1.20.1/fabric-server'))
             programArg '--nogui'
         }
     }
