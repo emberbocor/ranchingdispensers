@@ -17,8 +17,8 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.entity.animal.goat.Goat;
+import net.minecraft.world.entity.animal.sheep.Sheep;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.SuspiciousStewEffects;
@@ -74,17 +74,17 @@ public final class RanchingActions {
             Sheep sheep = (Sheep) animal;
             sheep.ate();
             source.level().broadcastEntityEvent(sheep, (byte) 10);
-            sheep.playSound(SoundEvents.GENERIC_EAT);
+            sheep.playSound(SoundEvents.GENERIC_EAT.value());
         } else if (animal.isBaby()) {
             animal.ageUp(AgeableMob.getSpeedUpSecondsWhenFeeding(-animal.getAge()), true);
             // forcedAgeTimer is client-local; use a vanilla particle packet for automation.
             source.level().sendParticles(ParticleTypes.HAPPY_VILLAGER, animal.getRandomX(1.0),
                     animal.getRandomY() + 0.5, animal.getRandomZ(1.0), 1, 0.0, 0.0, 0.0, 0.0);
-            playEatingSound(animal, stack);
+            playEatingSound(animal);
         } else {
             ((AnimalAccessor) animal).ranchingdispensers$setLoveCause(null);
             animal.setInLove(null);
-            playEatingSound(animal, stack);
+            playEatingSound(animal);
         }
         return stack;
     }
@@ -93,9 +93,10 @@ public final class RanchingActions {
         return woolRegrowth && animal instanceof Sheep sheep && !sheep.isBaby() && sheep.isSheared();
     }
 
-    private static void playEatingSound(Animal animal, ItemStack stack) {
-        if (animal instanceof Goat) {
-            animal.playSound(animal.getEatingSound(stack), 1.0F, 0.8F + animal.getRandom().nextFloat() * 0.4F);
+    private static void playEatingSound(Animal animal) {
+        if (animal instanceof Goat goat) {
+            animal.playSound(goat.isScreamingGoat() ? SoundEvents.GOAT_SCREAMING_EAT : SoundEvents.GOAT_EAT,
+                    1.0F, 0.8F + animal.getRandom().nextFloat() * 0.4F);
         }
     }
 
