@@ -12,7 +12,7 @@ neoForge {
             programArgument '--nogui'
         }
         configureEach {
-            gameDirectory = rootProject.file("runs/26.2/neoforge")
+            gameDirectory = rootProject.file("runs/26.3/neoforge")
         }
     }
     mods {

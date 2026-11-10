@@ -29,19 +29,19 @@ The dispenser still selects one nonempty slot at random. Each pulse performs at 
 - Suspicious stew consumes all prepared effects. The next bowl yields ordinary mushroom stew until a player prepares another effect.
 - Optional wool regrowth works even while an adult is on breeding cooldown or already in love. That pulse only regrows wool; a later pulse can breed when ready. Without Sheep Wool Regrowth, wheat follows ordinary breeding rules.
 - Feeding has no player owner and gives no dispenser-related player credit. Breeding XP stays vanilla; a mate genuinely fed by a player can still provide that player's normal breeding credit.
-- Feedback uses vanilla particles, sounds and entity events. Baby feeding sends a happy-villager particle from the server when accepted; it does not reproduce the client-predicted 40-tick particle sequence of a player's click. Ranching dispenser feedback plays once per pulse, including result overflow.
+- Feedback uses vanilla particles, sounds and entity events. Baby growth follows vanilla's server-side happy-villager particle timer. Dispenser sound and animation play once per pulse, including result overflow.
 
 ## Requirements
 
 | | NeoForge | Forge | Fabric |
 |---|---|---|---|
-| Minecraft | 26.2 | 26.2 | 26.2 |
+| Minecraft | 26.3 | 26.3 | 26.3 |
 | Java | 25 | 25 | 25 |
-| Loader | NeoForge 26.2.0.0-beta or newer | Forge 65.0.0 or newer | Fabric Loader 0.18.4 or newer |
-| Other | | | Fabric API 0.152.1+26.2 or newer for Minecraft 26.2 |
-| Jar | `ranchingdispensers-neoforge-26.2-<version>.jar` | `ranchingdispensers-forge-26.2-<version>.jar` | `ranchingdispensers-fabric-26.2-<version>.jar` |
+| Loader | NeoForge 26.3.0.0-beta or newer | Forge 66.0.0 or newer | Fabric Loader 0.19.3 or newer |
+| Other | | | Fabric API 0.160.5+26.3 or newer for Minecraft 26.3 |
+| Jar | `ranchingdispensers-neoforge-26.3-<version>.jar` | `ranchingdispensers-forge-26.3-<version>.jar` | `ranchingdispensers-fabric-26.3-<version>.jar` |
 
-On Minecraft 26.2, NeoForge and Forge are separate loaders that do not run each other's mods, so each has its own jar. Pick the jar that matches your game's loader.
+On Minecraft 26.3, NeoForge and Forge are separate loaders that do not run each other's mods, so each has its own jar. Pick the jar that matches your game's loader.
 
 ### Client and server
 
@@ -69,13 +69,13 @@ Missing keys use defaults. Invalid booleans use only the affected key's default 
 
 ## Saved data and removing the mod
 
-Animal age and forced age, love timer, sheep wool/color, prepared mooshroom stew effects and dispenser contents use existing vanilla save data. The temporary growth-particle timer is not synchronized or saved. No custom world file, entity marker or timer is added; config is separate from world data.
+Animal age and forced age, love timer, sheep wool/color, prepared mooshroom stew effects and dispenser contents use existing vanilla save data. The native growth-particle timer is transient and is not saved. No custom world file, entity marker or timer is added; config is separate from world data.
 
 Removing the mod restores vanilla dispensing. Growth, breeding, wool changes and produced items remain ordinary vanilla state and follow normal saving and aging rules. There are no modded blocks or items to convert.
 
 ## Compatibility
 
-- Targets Minecraft 26.2. Use one matching loader jar at a time.
+- Targets Minecraft 26.3. Use one matching loader jar at a time.
 - Sheep Wool Regrowth is optional and detected by mod ID, with no required dependency or direct class linkage.
 - Growth and breeding keep vanilla methods so cooldown hooks such as Instant Breeding can apply. Other mods can still change eligibility, growth, breeding and feedback.
 - Data packs can change food tags. Items with special dispenser handlers retain those handlers; adding them to a food tag does not enable automatic feeding with them.
@@ -91,7 +91,7 @@ Use JDK 25 and the included Gradle wrapper:
 
 Release jars are written to `neoforge/build/libs/`, `forge/build/libs/` and `fabric/build/libs/`. Use Fabric's ordinary jar from `fabric/build/libs/`; development jars are not release artifacts.
 
-Development profiles use `runs/26.2/neoforge` for both NeoForge sides, and separate `runs/26.2/forge-client`, `forge-server`, `fabric-client` and `fabric-server` directories. These directories are ignored by Git.
+Development profiles use `runs/26.3/neoforge` for both NeoForge sides, and separate `runs/26.3/forge-client`, `forge-server`, `fabric-client` and `fabric-server` directories. These directories are ignored by Git.
 
 ## License
 

@@ -17,10 +17,10 @@ dependencies {
 loom {
     runs {
         client {
-            runDir project.relativePath(rootProject.file("runs/26.2/fabric-client"))
+            runDir project.relativePath(rootProject.file("runs/26.3/fabric-client"))
         }
         server {
-            runDir project.relativePath(rootProject.file("runs/26.2/fabric-server"))
+            runDir project.relativePath(rootProject.file("runs/26.3/fabric-server"))
             programArg '--nogui'
         }
     }

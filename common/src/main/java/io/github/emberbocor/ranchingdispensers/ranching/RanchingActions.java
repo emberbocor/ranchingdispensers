@@ -11,7 +11,6 @@ import io.github.emberbocor.ranchingdispensers.platform.Services;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.AgeableMob;
@@ -78,9 +77,6 @@ public final class RanchingActions {
             sheep.playSound(SoundEvents.GENERIC_EAT.value());
         } else if (animal.isBaby()) {
             animal.ageUp(AgeableMob.getSpeedUpSecondsWhenFeeding(-animal.getAge()), true);
-            // forcedAgeTimer is client-local; use a vanilla particle packet for automation.
-            source.level().sendParticles(ParticleTypes.HAPPY_VILLAGER, animal.getRandomX(1.0),
-                    animal.getRandomY() + 0.5, animal.getRandomZ(1.0), 1, 0.0, 0.0, 0.0, 0.0);
             playEatingSound(animal);
         } else {
             ((AnimalAccessor) animal).ranchingdispensers$setLoveCause(null);
