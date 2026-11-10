@@ -16,6 +16,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.goat.Goat;
 import net.minecraft.world.entity.animal.sheep.Sheep;
@@ -102,8 +103,8 @@ public final class RanchingActions {
 
     private static ItemStack milk(BlockSource source, ItemStack stack) {
         Animal animal = nearest(source, candidate -> !candidate.isBaby()
-                && (candidate.getType() == EntityType.COW || candidate.getType() == EntityType.MOOSHROOM
-                || candidate.getType() == EntityType.GOAT));
+                && (candidate.getType() == EntityTypes.COW || candidate.getType() == EntityTypes.MOOSHROOM
+                || candidate.getType() == EntityTypes.GOAT));
         if (animal == null) {
             return stack;
         }
@@ -116,7 +117,7 @@ public final class RanchingActions {
     }
 
     private static ItemStack stew(BlockSource source, ItemStack stack) {
-        Animal animal = nearest(source, candidate -> !candidate.isBaby() && candidate.getType() == EntityType.MOOSHROOM);
+        Animal animal = nearest(source, candidate -> !candidate.isBaby() && candidate.getType() == EntityTypes.MOOSHROOM);
         if (animal == null) {
             return stack;
         }
@@ -145,7 +146,7 @@ public final class RanchingActions {
 
     private static boolean supported(Animal animal) {
         EntityType<?> type = animal.getType();
-        return type == EntityType.COW || type == EntityType.MOOSHROOM || type == EntityType.SHEEP
-                || type == EntityType.PIG || type == EntityType.CHICKEN || type == EntityType.RABBIT || type == EntityType.GOAT;
+        return type == EntityTypes.COW || type == EntityTypes.MOOSHROOM || type == EntityTypes.SHEEP
+                || type == EntityTypes.PIG || type == EntityTypes.CHICKEN || type == EntityTypes.RABBIT || type == EntityTypes.GOAT;
     }
 }
